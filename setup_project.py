@@ -38,7 +38,10 @@ def serve_index():
     return send_from_directory(app.static_folder, "index.html")
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)
+
 ''',
 
     ".env": "GEMINI_API_KEY=your_gemini_api_key_here",
@@ -108,3 +111,4 @@ python3 app.py
 ''')
 
 print(f"✅ تم إنشاء المشروع '{project_name}' وكل الملفات بنجاح.")
+
