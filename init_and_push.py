@@ -38,7 +38,9 @@ subprocess.run(["git", "commit", "-m", "تهيئة المشروع ورفع مل�
 # 3. ربط المستودع البعيد
 repo_url = input("🌐 أدخل رابط مستودع GitHub (HTTPS): ").strip()
 subprocess.run(["git", "branch", "-M", "main"])
-subprocess.run(["git", "remote", "add", "origin", repo_url])
-subprocess.run(["git", "push", "-u", "origin", "main"])
+remotes = subprocess.run(["git", "remote"], capture_output=True, text=True).stdout.split()
+if "origin" not in remotes:
+    subprocess.run(["git", "remote", "add", "origin", repo_url])
+
 
 print("\n🎉 تم رفع المشروع إلى GitHub بنجاح!")
