@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  stable-diffusion-app:
+    build: .
+    ports:
+      - "7860:7860"
+    volumes:
+      - ./outputs:/app/outputs
+      - ./assets:/app/assets
+      - ./models:/app/models
+    environment:
+      - MODEL_PATH=./models/stable-diffusion-v1
+      - OUTPUT_DIR=./outputs
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
